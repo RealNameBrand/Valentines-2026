@@ -1,0 +1,544 @@
+:root {
+  --primary: #ff4d6d;
+  --primary-dark: #c9184a;
+  --secondary: #ff8fa3;
+  --bg: #fff0f3;
+  --text: #590d22;
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.5);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  background: radial-gradient(circle at center, var(--bg), #ffe5ec);
+  color: var(--text);
+  min-height: 100vh;
+  /* Use dynamic viewport height for mobile browsers */
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Home Page Styles */
+.home-container {
+  text-align: center;
+  z-index: 10;
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+}
+
+.hero-content {
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 3rem 2rem;
+  border-radius: 30px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 rgba(255, 77, 109, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.title {
+  font-size: 3rem;
+  margin: 0;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  margin: 0;
+  opacity: 0.8;
+  font-style: italic;
+  max-width: 400px;
+}
+
+.start-button {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+  transition: box-shadow 0.3s ease;
+  /* Ensure large touch target */
+  min-height: 48px;
+  touch-action: manipulation;
+}
+
+.start-button:hover {
+  box-shadow: 0 6px 20px rgba(255, 77, 109, 0.6);
+}
+
+/* Background Animations */
+.background-hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-heart {
+  position: absolute;
+  color: var(--secondary);
+  opacity: 0.3;
+  font-size: 2rem;
+  animation: floatUp 15s linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(110vh) rotate(0deg);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.5;
+  }
+
+  90% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateY(-10vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Utilities */
+.card-stack {
+  position: relative;
+  /* 4:3 Aspect Ratio (roughly) maintained within constraints */
+  width: 90vw;
+  max-width: 360px;
+  /* 360px width */
+  height: 480px;
+  /* 4:3 of 360 is 480 */
+  perspective: 1000px;
+}
+
+.swipe-deck-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.profile-card {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  position: absolute;
+  transform-origin: bottom center;
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+  /* Ensure image covers entire card */
+}
+
+.profile-card:active {
+  cursor: grabbing;
+}
+
+/* Full Size Background Image */
+.card-image-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: #ddd;
+}
+
+.image-placeholder-full {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8rem;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 800;
+}
+
+/* Gradient Overlay - Subtle and smaller */
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  /* Reduced from 60% */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 50%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Content on top of image */
+.card-content-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.25rem;
+  z-index: 2;
+  color: white;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  /* Tighter gap */
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+}
+
+.name {
+  margin: 0;
+  /* Font size is now dynamic inline style */
+  font-weight: 800;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.1;
+}
+
+.age-badge {
+  background: white;
+  color: var(--text);
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.card-content-overlay .bio {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  margin: 0;
+
+  /* Clamp to 2 lines to save space */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Updated Tags for Dark Background */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.2rem 0 0.5rem 0;
+}
+
+.tag {
+  padding: 0.3rem 0.7rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  backdrop-filter: blur(4px);
+}
+
+.tag.like {
+  background: rgba(0, 105, 92, 0.3);
+  /* Transparent Green */
+  color: #80cbc4;
+  border: 1px solid rgba(128, 203, 196, 0.3);
+}
+
+.tag.dislike {
+  background: rgba(198, 40, 40, 0.3);
+  /* Transparent Red */
+  color: #ef9a9a;
+  border: 1px solid rgba(239, 154, 154, 0.3);
+}
+
+/* Gesture Stamps */
+.stamp {
+  position: absolute;
+  top: 40px;
+  padding: 5px 15px;
+  border: 4px solid;
+  border-radius: 10px;
+  font-size: 40px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  z-index: 10;
+  transform: rotate(-15deg);
+}
+
+.like-stamp {
+  left: 40px;
+  color: #4cd137;
+  border-color: #4cd137;
+  transform: rotate(-15deg);
+}
+
+.nope-stamp {
+  right: 40px;
+  color: #e84118;
+  border-color: #e84118;
+  transform: rotate(15deg);
+}
+
+
+.controls {
+  display: flex;
+  gap: 1.5rem;
+  z-index: 100;
+  padding-bottom: 2rem;
+  /* Add some space at bottom */
+}
+
+.control-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  touch-action: manipulation;
+}
+
+.control-btn:hover {
+  transform: scale(1.1);
+}
+
+.control-btn.pass {
+  background: white;
+  color: #ff4d6d;
+}
+
+.control-btn.like {
+  background: linear-gradient(135deg, #ff4d6d, #c9184a);
+  color: white;
+}
+
+.no-more-profiles {
+  text-align: center;
+  color: var(--text);
+  padding: 2rem;
+  background: var(--glass);
+  border-radius: 20px;
+  width: 80%;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 400px) {
+  .card-stack {
+    height: 65vh;
+    /* Allow it to be flexible on very small screens */
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .hero-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .control-btn {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.swipe-deck-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  justify-content: center;
+}
+
+.profile-card {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: absolute;
+  transform-origin: top center;
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-card:active {
+  cursor: grabbing;
+}
+
+.card-image-container {
+  height: 55%;
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+}
+
+.image-placeholder {
+  font-size: 5rem;
+  color: white;
+  font-weight: bold;
+}
+
+.card-content {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  overflow-y: auto;
+  /* Scroll bio if too long */
+}
+
+.card-content h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  color: var(--text);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.4rem 0;
+}
+
+.tag {
+  padding: 0.3rem 0.7rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.tag.like {
+  background: #e0f2f1;
+  color: #00695c;
+}
+
+.tag.dislike {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.bio {
+  color: #666;
+  line-height: 1.4;
+  font-size: 0.9rem;
+}
+
+.controls {
+  display: flex;
+  gap: 1.5rem;
+  z-index: 100;
+  padding-bottom: 1rem;
+}
+
+.control-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  touch-action: manipulation;
+}
+
+.control-btn:hover {
+  transform: scale(1.1);
+}
+
+.control-btn.pass {
+  background: white;
+  color: #ff4d6d;
+}
+
+.control-btn.like {
+  background: linear-gradient(135deg, #ff4d6d, #c9184a);
+  color: white;
+}
+
+.no-more-profiles {
+  text-align: center;
+  color: var(--text);
+  padding: 2rem;
+  background: var(--glass);
+  border-radius: 20px;
+  width: 80%;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 400px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .hero-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .card-content h2 {
+    font-size: 1.4rem;
+  }
+
+  .control-btn {
+    width: 50px;
+    height: 50px;
+  }
+}
