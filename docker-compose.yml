@@ -3,10 +3,14 @@ services:
     build:
       context: ./frontend_prototype
       dockerfile: Dockerfile
+      container_name: valentines-2026
     ports:
-      - "5173:5173"
+      - "4204:5173"
+      # - "5173:5173"
+      
     volumes:
       - ./frontend_prototype:/app
       - /app/node_modules # Avoid overwriting container node_modules with local (empty) ones
     environment:
       - CHOKIDAR_USEPOLLING=true # Helps with hot reload in some environments
+    restart: always
