@@ -2,10 +2,10 @@ services:
   frontend:
     build:
       context: ./frontend_prototype
-      dockerfile: Dockerfile
+      # dockerfile: Dockerfile
       # container_name: valentines-2026
     ports:
-      - "4204:5173"
+      - "4204:80"
       # - "5173:5173"
       
     volumes:
