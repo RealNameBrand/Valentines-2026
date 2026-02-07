@@ -27,13 +27,13 @@ const JOBS = [
     "Fortune Cookie Writer", "Subway Surfer Pro", "Minecraft Architect", "Professional Third Wheel",
     "Ex-Child Star (Local Commercial)", "Neighborhood Watch Captain", "Amateur Detective",
     "Professional Panic Buyer", "Cloud Yeller", "Sidewalk Inspector", "Cat Lawyer",
-    "Influencer (12 followers)", "Crypto Loser", "Professional Risky Texter", "Labubu quality control tester.",
-    "X (formerly know as Twitter) fact-checker", "Professional Mine Sweeper", "Uber Driver.", "league of legends pro.",
-    "Gender Revealer.", "Time-traveller", "Sock Knitter.", "The Button Factory.", "Lemonade stand 2",
-    "Customer Service Representative.", "Spam Caller.", "Bass Pro Shops Manager.", "Dog Whisperer.",
-    "Newest Shark on Shark Tank.", "Make-up Tester.", "Professional Waifu",
-    "Currently working at ██████████ within the ██████ division.", "Crocodile Hunter.", "Marine Biologist.",
-    "Bull Runner.", "Manager at Weenie Hut Jr's", "Fry Cook."
+    "Influencer (12 followers)", "Crypto Loser", "Professional Risky Texter", "Labubu quality control tester",
+    "X (formerly know as Twitter) fact-checker", "Professional Mine Sweeper", "Uber Driver", "league of legends pro",
+    "Gender Revealer", "Time-traveller", "Sock Knitter", "The Button Factory", "Lemonade stand 2",
+    "Customer Service Representative", "Spam Caller", "Bass Pro Shops Manager", "Dog Whisperer",
+    "Newest Shark on Shark Tank", "Make-up Tester", "Professional Waifu",
+    "Currently working at ██████████ within the ██████ division", "Crocodile Hunter", "Marine Biologist",
+    "Bull Runner", "Manager at Weenie Hut Jr's", "Fry Cook"
 ]
 
 const BIO_SNIPPETS = [
