@@ -19,8 +19,8 @@ const Home = ({ onStart }) => {
                     <Heart size={80} fill="#ff4d6d" color="#ff4d6d" />
                 </motion.div>
 
-                <h1 className="title">Brody's Valentine</h1>
-                <p className="subtitle">Go big or go home (and by home I mean kms)</p>
+                <h1 className="title">2026 Valentines</h1>
+                <p className="subtitle">Find the Brody that's right for you!</p>
 
                 <motion.button
                     whileHover={{ scale: 1.05 }}
@@ -28,7 +28,7 @@ const Home = ({ onStart }) => {
                     className="start-button"
                     onClick={onStart}
                 >
-                    Find Love Today
+                    Find your Brody Today!
                 </motion.button>
             </motion.div>
 
