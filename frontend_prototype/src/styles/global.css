@@ -30,12 +30,6 @@ body {
   position: relative;
 }
 
-.social-footer {
-    position: relative; /* Or fixed if you want it always visible */
-    z-index: 999;       /* Higher than any possible card index */
-    display: block;     /* Ensure it's not collapsed */
-    margin-top: 20px;
-}
 
 /* Home Page Styles */
 .home-container {
@@ -365,6 +359,24 @@ body {
 .control-btn.like {
   background: linear-gradient(135deg, #ff4d6d, #c9184a);
   color: white;
+}
+
+.social-footer {
+  display: flex;
+  gap: 1.5rem;
+  z-index: 100;
+  padding-bottom: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  touch-action: manipulation;
 }
 
 .no-more-profiles {

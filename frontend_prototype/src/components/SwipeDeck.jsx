@@ -100,8 +100,9 @@ const SwipeDeck = () => {
                 <button onClick={() => handleSwipe("right", profiles[0].id)} className="control-btn like">
                     <Heart size={32} fill="white" />
                 </button>
-            </div>
 
+
+            </div>
 
             <div className="social-footer">
                 <a href="https://www.instagram.com/_brody.h/" target="_blank" rel="noreferrer">
@@ -112,6 +113,7 @@ const SwipeDeck = () => {
                     />
                 </a>
             </div>
+
         </div>
     )
 }
