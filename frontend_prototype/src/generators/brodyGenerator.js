@@ -129,14 +129,34 @@ const IMAGE_URLS = Object.values(imageModules)
 
 // Helper: Pick a random element and REMOVE it from the array (mutates array)
 // Automatically refills from source if empty
+// const popRandomElement = (pool, source) => {
+//     if (pool.length === 0) {
+//         // Refill if empty
+//         pool.push(...source)
+//     }
+//     const index = Math.floor(Math.random() * pool.length)
+//     return pool.splice(index, 1)[0]
+// }
+
+
 const popRandomElement = (pool, source) => {
     if (pool.length === 0) {
-        // Refill if empty
-        pool.push(...source)
+        pool.push(...source);
+        shuffleArray(pool); // <-- Shuffle the new deck immediately
     }
-    const index = Math.floor(Math.random() * pool.length)
-    return pool.splice(index, 1)[0]
+    // Since it's already shuffled, you could technically just 
+    // pop() the last item for better performance, but splice(index) works too!
+    const index = Math.floor(Math.random() * pool.length);
+    return pool.splice(index, 1)[0];
 }
+
+const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+};
 
 // Helper: Pick items under char limit and REMOVE them from pool
 const popItemsUnderCharacterLimit = (pool, source, charLimit, minItems = 1) => {
@@ -198,25 +218,6 @@ export const generateProfile = () => {
     }
     return generateUniqueProfile(tempPools)
 }
-
-// // Generates a profile using specific instances of pools
-// // This allows a batch to share state (avoiding repeats)
-// const generateUniqueProfile = (pools) => {
-//     const id = Math.floor(Math.random() * 1000000000)
-
-//     return {
-//         id: id,
-//         name: generateName(pools.adjectives, ADJECTIVES),
-//         age: Math.floor(Math.random() * (35 - 19) + 19),
-//         // Pick a random image from the folder, or fallback if empty
-//         imageUrl: pools.images.length > 0
-//             ? pools.images[Math.floor(Math.random() * pools.images.length)] // Images can repeat, that's fine/expected
-//             : null,
-//         about_me: `${popRandomElement(pools.jobs, JOBS)}. ${popRandomElement(pools.bios, BIO_SNIPPETS)}`,
-//         likes: popItemsUnderCharacterLimit(pools.likes, LIKES, 25, 1),
-//         dislikes: popItemsUnderCharacterLimit(pools.dislikes, DISLIKES, 20, 1)
-//     }
-// }
 
 const generateUniqueProfile = (pools) => {
     const id = Math.floor(Math.random() * 1000000000)
