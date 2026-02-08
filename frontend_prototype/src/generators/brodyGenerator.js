@@ -199,8 +199,25 @@ export const generateProfile = () => {
     return generateUniqueProfile(tempPools)
 }
 
-// Generates a profile using specific instances of pools
-// This allows a batch to share state (avoiding repeats)
+// // Generates a profile using specific instances of pools
+// // This allows a batch to share state (avoiding repeats)
+// const generateUniqueProfile = (pools) => {
+//     const id = Math.floor(Math.random() * 1000000000)
+
+//     return {
+//         id: id,
+//         name: generateName(pools.adjectives, ADJECTIVES),
+//         age: Math.floor(Math.random() * (35 - 19) + 19),
+//         // Pick a random image from the folder, or fallback if empty
+//         imageUrl: pools.images.length > 0
+//             ? pools.images[Math.floor(Math.random() * pools.images.length)] // Images can repeat, that's fine/expected
+//             : null,
+//         about_me: `${popRandomElement(pools.jobs, JOBS)}. ${popRandomElement(pools.bios, BIO_SNIPPETS)}`,
+//         likes: popItemsUnderCharacterLimit(pools.likes, LIKES, 25, 1),
+//         dislikes: popItemsUnderCharacterLimit(pools.dislikes, DISLIKES, 20, 1)
+//     }
+// }
+
 const generateUniqueProfile = (pools) => {
     const id = Math.floor(Math.random() * 1000000000)
 
@@ -208,15 +225,16 @@ const generateUniqueProfile = (pools) => {
         id: id,
         name: generateName(pools.adjectives, ADJECTIVES),
         age: Math.floor(Math.random() * (35 - 19) + 19),
-        // Pick a random image from the folder, or fallback if empty
-        imageUrl: pools.images.length > 0
-            ? pools.images[Math.floor(Math.random() * pools.images.length)] // Images can repeat, that's fine/expected
-            : null,
+        
+        // FIX: Use popRandomElement to ensure the image is removed from the current pool
+        imageUrl: popRandomElement(pools.images, IMAGE_URLS), 
+        
         about_me: `${popRandomElement(pools.jobs, JOBS)}. ${popRandomElement(pools.bios, BIO_SNIPPETS)}`,
         likes: popItemsUnderCharacterLimit(pools.likes, LIKES, 25, 1),
         dislikes: popItemsUnderCharacterLimit(pools.dislikes, DISLIKES, 20, 1)
     }
 }
+
 
 export const generateBatch = (amount = 10) => {
     // Create a fresh "Deck" for this batch
