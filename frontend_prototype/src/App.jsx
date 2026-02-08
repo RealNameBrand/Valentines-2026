@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Home from './components/Home'
 import SwipeDeck from './components/SwipeDeck'
-import instaIcon from './assets/InstagramIcon.png' // Import your image here
+// import instaIcon from './assets/' // Import your image here
 import './styles/global.css'
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
             <footer className="social-footer">
                 <a href="https://www.instagram.com/_brody.h/" target="_blank" rel="noreferrer">
                     <img
-                        src={instaIcon}
+                        src='./assets/instagram-logo.png'
                         alt="Instagram"
                         style={{ width: '30px', height: '30px' }}
                     />
