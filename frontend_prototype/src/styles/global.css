@@ -515,13 +515,10 @@ body {
 }
 
 .socials {
-    padding-top: 5rem;
-    padding-bottom: 1rem;
     display: flex;
-    flex-direction: column; /* This stacks text over image */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px; /* Adds space between text and icon */
 }
 
 .no-more-profiles {
