@@ -31,10 +31,10 @@ body {
 }
 
 .social-footer {
-    margin-top: auto; /* Pushes footer to bottom */
-    padding: 20px;
-    text-align: center;
-    z-index: 10; /* Keeps it above the deck */
+    position: relative; /* Or fixed if you want it always visible */
+    z-index: 999;       /* Higher than any possible card index */
+    display: block;     /* Ensure it's not collapsed */
+    margin-top: 20px;
 }
 
 /* Home Page Styles */

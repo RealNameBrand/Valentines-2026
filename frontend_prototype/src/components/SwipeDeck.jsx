@@ -102,8 +102,8 @@ const SwipeDeck = () => {
                 </button>
             </div>
 
-                     
-            <footer className="social-footer">
+
+            <div className="social-footer">
                 <a href="https://www.instagram.com/_brody.h/" target="_blank" rel="noreferrer">
                     <img
                         src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg"
@@ -111,11 +111,8 @@ const SwipeDeck = () => {
                         style={{ width: '30px', height: '30px' }}
                     />
                 </a>
-            </footer>
+            </div>
         </div>
-
-
-
     )
 }
 
