@@ -3,8 +3,8 @@ const ADJECTIVES = [
     "Feral", "Sleepy", "Suspiciously Wealthy", "Unhinged", "Romantically Available",
     "Caffeinated", "Lost", "Existential", "Chaotic", "Domesticated", "Unemployed", "Flight Risk",
     "Slightly Damp", "Highly Flammable", "Glow-in-the-dark", "Biodegradable", "Haunted", "Pixelated",
-    "Upside-down", "Not A Fed", "Three Raccoons In A Trenchcoat", "Sentient", "Vibrating", "Spicy",
-    "Crunchy", "Moist", "High-Definition", "Low-Poly", "Gluten-Free", "Free-Range",
+    "Upside-down", "Not A Fed", "Three Raccoons In A Trenchcoat", "Sentient", "Spicy",
+    "Crunchy", "High-Definition", "Low-Poly", "Gluten-Free", "Free-Range",
     "Solar-Powered", "Rechargeable", "Vintage", "Limited Edition", "Refurbished", "cursed",
     "Slightly dented", "Top-shelf", "Generic Brand", "Discount", "Single-use", "Recyclable",
     "Instructional", "Abstract", "Geometrically Impossible", "Time-traveling", "Interdimensional",
@@ -14,7 +14,10 @@ const ADJECTIVES = [
     "Swagger", "Balling", "Balding", "Hacker", "Big Brain", "Golf", "Fisher", "Conductor", "New yorker", "David",
     "non-euclidean", "Cyber", "Friendly Neighbourhood", "Buying GF", "Adrien", "Project Manager",
     "Girl Boss", "Loan Shark", "Cyborg", "uɐᴉlɐɹʇsnɐ", "����", "3D Printed", "Cyber", "Glowing",
-    "Schizophrenic", "Cowboy"
+    "Schizophrenic", "Cowboy", "Overclocked", "Main Character", "Side Quest Enthusiast", "Vaguely Threatening", "Under-seasoned",
+    "Heavily Modded", "Discontinued", "As Seen On TV", "End-of-Life", "High-Maintenance", "Standard Issue", "Deep-Fried", "Carbon Neutral", "Factory Sealed",
+    "Legally Distinct","Final Sale", "As-Is",
+
 ]
 
 const JOBS = [
@@ -33,7 +36,8 @@ const JOBS = [
     "Customer Service Representative", "Spam Caller", "Bass Pro Shops Manager", "Dog Whisperer",
     "Newest Shark on Shark Tank", "Make-up Tester", "Professional Waifu",
     "Currently working at ██████████ within the ██████ division", "Crocodile Hunter", "Marine Biologist",
-    "Bull Runner", "Manager at Weenie Hut Jr's", "Fry Cook"
+    "Bull Runner", "Manager at Weenie Hut Jr's", "Fry Cook", "Unlicensed Pharmacist", "Wikipedia Editor", "Professional Bridge Burner", 
+    "Former High School Legend", "The Person Who Puts The Stickers On Apples"
 ]
 
 const BIO_SNIPPETS = [
@@ -85,7 +89,13 @@ const BIO_SNIPPETS = [
     "I leave the cookie in the milk until the bubbles stop.", "Genuine Fairy",
     "Even the milk has a date for the 14th.", "Yappaholic.",
     "Friday nights are for my WWII model collection.", "Stepping on Lego to feel something again.",
-    "You'll find me walking my pitbull without a leash everyday.", "If it came down to it I would do CPR."
+    "You'll find me walking my pitbull without a leash everyday.", "If it came down to it I would do CPR.",
+    "My diet consists entirely of things I found in the air fryer.",
+    "I once got into a fight with a self-checkout machine and lost.",
+    "My hobbies include staring at the wall and losing my keys.",
+    "My credit score is a surprise even to me.",
+    "I’m only here because my court-appointed therapist suggested it.",
+    "I once apologized to a mannequin for bumping into it.",
 ]
 
 const LIKES = [
@@ -103,7 +113,7 @@ const LIKES = [
     "Bacon", "Eating sand", "Donuts", "Orange", "Hannah Montana", "Classical music", "Talus Dome",
     "Your dad's music", "Your number", "Looking mysterious", "Ice cream", "Fishing", "Fish",
     "Redstone", "De-centralized data storage", "Cows", "Heart Passion", "Clubbing", "Swimming", "Movies",
-    "Cuddles", "Low balling on marketplace", "Space", "Oxygen"
+    "Cuddles", "Low balling on marketplace", "Space", "Oxygen","Unlabeled buttons","Public transport naps",
 ]
 
 const DISLIKES = [
@@ -119,7 +129,7 @@ const DISLIKES = [
     "Creepers", "Gluing my fingers together", "Elderly",
     "Handshakes", "Green", "Miley Cyrus", "Sports ball", "5G", "Brussels sprouts", "TikTok", "Not fishing",
     "Bluestone", "IEEE standards", "Protocol 7", "First in food line ", "Drowning", "Loud noises",
-    "Charlie Sheen", "Cloud storage", "Carbon dioxide"
+    "Charlie Sheen", "Cloud storage", "Carbon dioxide", "The 'typing...' bubble that disappears", "Chewing on aluminum foil",
 ]
 
 // Automatically import all images from the assets folder
@@ -144,7 +154,6 @@ const popRandomElement = (pool, source) => {
         pool.push(...source);
         shuffleArray(pool); // <-- Shuffle the new deck immediately
     }
-    // Since it's already shuffled, you could technically just 
     // pop() the last item for better performance, but splice(index) works too!
     const index = Math.floor(Math.random() * pool.length);
     return pool.splice(index, 1)[0];
@@ -158,12 +167,9 @@ const shuffleArray = (array) => {
     return array;
 };
 
-// Helper: Pick items under char limit and REMOVE them from pool
 const popItemsUnderCharacterLimit = (pool, source, charLimit, minItems = 1) => {
     let selected = []
     let currentChars = 0
-
-    // Safety break to prevent infinite loops
     let attempts = 0
     const MAX_ATTEMPTS = 50
 
@@ -173,26 +179,18 @@ const popItemsUnderCharacterLimit = (pool, source, charLimit, minItems = 1) => {
         if (pool.length === 0) {
             pool.push(...source)
         }
-
-        // Try to find an item that fits
-        // We pick a random candidate
         const candidateIndex = Math.floor(Math.random() * pool.length)
         const candidate = pool[candidateIndex]
 
         if (selected.length < minItems) {
-            // Must take it if we haven't met minItems
             pool.splice(candidateIndex, 1)
             selected.push(candidate)
             currentChars += candidate.length
         } else if (currentChars + candidate.length <= charLimit) {
-            // Take it if it fits budget
             pool.splice(candidateIndex, 1)
             selected.push(candidate)
             currentChars += candidate.length
         } else {
-            // If we found something too big, we just skip it for this profile 
-            // and maybe stop trying if we're "full enough" to avoid grinding through the whole list
-            // For efficiency, if 3 consecutive attempts fail to fit, we stop
             if (attempts > minItems + 5) break;
         }
     }
@@ -201,13 +199,11 @@ const popItemsUnderCharacterLimit = (pool, source, charLimit, minItems = 1) => {
 
 const generateName = (pool, source) => {
     // 30% chance of just "Brody"
-    // To ensure "Brody" doesn't consume an adjective, we handle it separately
     if (Math.random() < 0.3) return "Brody"
     return `${popRandomElement(pool, source)} Brody`
 }
 
 export const generateProfile = () => {
-    // Legacy support for single generation (creates its own temporary pool)
     const tempPools = {
         adjectives: [...ADJECTIVES],
         jobs: [...JOBS],
@@ -226,10 +222,8 @@ const generateUniqueProfile = (pools) => {
         id: id,
         name: generateName(pools.adjectives, ADJECTIVES),
         age: Math.floor(Math.random() * (35 - 19) + 19),
-        
-        // FIX: Use popRandomElement to ensure the image is removed from the current pool
-        imageUrl: popRandomElement(pools.images, IMAGE_URLS), 
-        
+        imageUrl: popRandomElement(pools.images, IMAGE_URLS),
+
         about_me: `${popRandomElement(pools.jobs, JOBS)}. ${popRandomElement(pools.bios, BIO_SNIPPETS)}`,
         likes: popItemsUnderCharacterLimit(pools.likes, LIKES, 25, 1),
         dislikes: popItemsUnderCharacterLimit(pools.dislikes, DISLIKES, 20, 1)
@@ -238,8 +232,6 @@ const generateUniqueProfile = (pools) => {
 
 
 export const generateBatch = (amount = 10) => {
-    // Create a fresh "Deck" for this batch
-    // We clone the source arrays so we can remove items as we use them
     const pools = {
         adjectives: [...ADJECTIVES],
         jobs: [...JOBS],
