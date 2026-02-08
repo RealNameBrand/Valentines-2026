@@ -101,7 +101,21 @@ const SwipeDeck = () => {
                     <Heart size={32} fill="white" />
                 </button>
             </div>
+
+                     
+            <footer className="social-footer">
+                <a href="https://www.instagram.com/_brody.h/" target="_blank" rel="noreferrer">
+                    <img
+                        src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg"
+                        alt="Instagram"
+                        style={{ width: '30px', height: '30px' }}
+                    />
+                </a>
+            </footer>
         </div>
+
+
+
     )
 }
 

@@ -14,16 +14,7 @@ function App() {
                 <SwipeDeck />
             )}
 
-            
-            <footer className="social-footer">
-                <a href="https://www.instagram.com/_brody.h/" target="_blank" rel="noreferrer">
-                    <img
-                        src='./assets/instagram-logo.png'
-                        alt="Instagram"
-                        style={{ width: '30px', height: '30px' }}
-                    />
-                </a>
-            </footer>
+   
         </div>
     )
 }
