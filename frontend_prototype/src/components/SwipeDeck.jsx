@@ -104,7 +104,8 @@ const SwipeDeck = () => {
 
             </div>
 
-            <div className="social-footer">
+            <div className="socials">
+                <span classname="social-label">_brody.h</span>
                 <a href="https://www.instagram.com/_brody.h/" target="_blank" rel="noreferrer">
                     <img
                         src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg"
